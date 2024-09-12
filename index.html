@@ -74,6 +74,8 @@
         if (firstCard.cardId === secondCard.cardId) {
             score += 10;
             scoreText.setText(`Score: ${score}`);
+            firstCard.disableInteractive();
+            secondCard.disableInteractive();
             firstCard = null;
             secondCard = null;
             this.time.delayedCall(1000, () => {checkForVictory.call(this)});
@@ -122,6 +124,9 @@
         let startY = 200;
         scoreText = this.add.text(50, 10, 'Score: 0', { fontSize: '32px', fill: '#fff'});
         timerText = this.add.text(580, 10, `Time: ${timeLeft}`, { fontSize: '32px', fill: '#fff' });
+
+        const map = this.make.tilemap({ key: 'tilemapKey' });
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
         cardData.forEach((card, index) => {
             let xOffset = index;
