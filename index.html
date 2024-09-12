@@ -18,6 +18,10 @@
         type: Phaser.AUTO,
         width: window.innerWidth,
         height: window.innerHeight,
+        scale: {
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH
+        },
         scene: {
             preload: preload,
             create: create,
@@ -126,7 +130,6 @@
                 xOffset = index - 4;
             }
             let cardSprite = this.add.sprite(startX + xOffset * 180, startY, 'cardBack').setInteractive();
-            cardSprite.setScale(1)
             cardSprite.cardId = card.id;
             cardSprite.isFlipped = false;
 
@@ -140,7 +143,6 @@
                     checkMatch.call(this.scene);
                 }
             });
-
             cards.push(cardSprite);
         });
 
