@@ -48,8 +48,9 @@
     let firstCard, secondCard;
     let score = 0;
     let scoreText;
-    let timeLeft = 30
+    let timeLeft = 20
     let timerText;
+    const cardScaling = 0.8
 
     const game = new Phaser.Game(config);
 
@@ -62,7 +63,7 @@
                 card.setTexture(card.isFlipped ? card.cardId : 'cardBack');
                 this.tweens.add({
                     targets: card,
-                    scaleX: 700/window.innerHeight,
+                    scaleX: cardScaling,
                     duration: 300
                 });
             }
@@ -132,7 +133,7 @@
                 xOffset = index - 4;
             }
             let cardSprite = this.add.sprite(startX + xOffset * 180, startY, 'cardBack').setInteractive();
-            cardSprite.setScale(700/window.innerHeight, 700/window.innerHeight)
+            cardSprite.setScale(cardScaling)
             cardSprite.cardId = card.id;
             cardSprite.isFlipped = false;
 
