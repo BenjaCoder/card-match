@@ -16,8 +16,8 @@
 <script>
     const config = {
         type: Phaser.AUTO,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: 800,
+        height: 600,
         scale: {
             mode: Phaser.Scale.FIT,
             autoCenter: Phaser.Scale.CENTER_BOTH
@@ -62,7 +62,7 @@
                 card.setTexture(card.isFlipped ? card.cardId : 'cardBack');
                 this.tweens.add({
                     targets: card,
-                    scaleX: 1,
+                    scaleX: 700/window.innerHeight,
                     duration: 300
                 });
             }
@@ -125,9 +125,6 @@
         scoreText = this.add.text(50, 10, 'Score: 0', { fontSize: '32px', fill: '#fff'});
         timerText = this.add.text(580, 10, `Time: ${timeLeft}`, { fontSize: '32px', fill: '#fff' });
 
-        const map = this.make.tilemap({ key: 'tilemapKey' });
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
         cardData.forEach((card, index) => {
             let xOffset = index;
             if (index > 3) {
@@ -135,6 +132,7 @@
                 xOffset = index - 4;
             }
             let cardSprite = this.add.sprite(startX + xOffset * 180, startY, 'cardBack').setInteractive();
+            cardSprite.setScale(700/window.innerHeight, 700/window.innerHeight)
             cardSprite.cardId = card.id;
             cardSprite.isFlipped = false;
 
