@@ -85,18 +85,22 @@ class StartScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('button', 'assets/button.png');
         this.load.image('background', 'assets/background.png');
+        this.load.image('startButton', 'assets/button.png');
+        this.load.image('logButton', 'assets/logButton.png');
     }
 
     create() {
         this.add.image(400, 300, 'background');
 
-        const button = this.add.sprite(400, 300, 'button').setInteractive();
+        const startButton = this.add.sprite(400, 220, 'startButton').setInteractive();
+        const logButton = this.add.sprite(400, 470, 'logButton').setInteractive();
+        let logButtonScale = 0.35;
+        logButton.setScale(logButtonScale);
 
-        button.on('pointerdown', () => {
+        startButton.on('pointerdown', () => {
             this.tweens.add({
-                targets: button,
+                targets: startButton,
                 scaleX: 0.92,
                 scaleY: 0.92,
                 duration: 150,
@@ -106,6 +110,50 @@ class StartScene extends Phaser.Scene {
                 }
             });
         });
+
+        logButton.on('pointerdown', () => {
+            this.tweens.add({
+                targets: logButton,
+                scaleX: logButtonScale * 0.92,
+                scaleY: logButtonScale * 0.92,
+                duration: 150,
+                yoyo: true,
+                onComplete: () => {
+                    this.scene.start('ChangeLogScene');
+                }
+            });
+        });
+    }
+}
+
+class ChangeLogScene extends Phaser.Scene {
+    constructor() {
+        super({ key: 'ChangeLogScene' });
+    }
+
+    preload() {
+        this.load.image('backButton', 'assets/backButton.png');
+    }
+
+    create() {
+        this.add.text(400, 100, `Change Log`, { fontFamily: 'Calibri', fontSize: '64px', fill:'#fff', fontWeight: 'bold' }).setOrigin(0.5)
+        this.add.text(400, 250, `* added Start button\n\n* added Change log`, { fontFamily: 'Calibri', fontSize: '32px', fill:'#fff' }).setOrigin(0.5)
+        const button = this.add.sprite(400, 480, 'backButton').setInteractive();
+        let backButtonScale = 0.75;
+        button.setScale(backButtonScale)
+    
+        button.on('pointerdown', () => {
+            this.tweens.add({
+                targets: button,
+                scaleX: backButtonScale * 0.92,
+                scaleY: backButtonScale * 0.92,
+                duration: 150,
+                yoyo: true,
+                onComplete: () => {
+                    this.scene.start('StartScene');
+                }
+            });
+        })
     }
 }
 
@@ -113,8 +161,6 @@ class MainGameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MainGameScene'});
     }
-
-    
     
      preload() {
         this.load.image('cardBack', '/assets/card_back.png');
@@ -179,7 +225,7 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [StartScene, MainGameScene]
+    scene: [StartScene, ChangeLogScene, MainGameScene]
 };
 
 const game = new Phaser.Game(config);
