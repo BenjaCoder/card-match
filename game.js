@@ -1,3 +1,6 @@
+import StartScene from './StartScene.js';
+import ChangeLogScene from './ChangeLogScene.js';
+
 let cardData = [
     { id: 1, name: "Elemental HERO Avian", image: "card1.png" },
     { id: 2, name: "Elemental HERO Burstinatrix", image: "card2.png" },
@@ -77,84 +80,6 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-}
-
-class StartScene extends Phaser.Scene {
-    constructor() {
-        super({ key: 'StartScene' });
-    }
-
-    preload() {
-        this.load.image('background', 'assets/background.png');
-        this.load.image('startButton', 'assets/button.png');
-        this.load.image('logButton', 'assets/logButton.png');
-    }
-
-    create() {
-        this.add.image(400, 300, 'background');
-
-        const startButton = this.add.sprite(400, 220, 'startButton').setInteractive();
-        const logButton = this.add.sprite(400, 470, 'logButton').setInteractive();
-        let logButtonScale = 0.35;
-        logButton.setScale(logButtonScale);
-
-        startButton.on('pointerdown', () => {
-            this.tweens.add({
-                targets: startButton,
-                scaleX: 0.92,
-                scaleY: 0.92,
-                duration: 150,
-                yoyo: true,
-                onComplete: () => {
-                    this.scene.start('MainGameScene');
-                }
-            });
-        });
-
-        logButton.on('pointerdown', () => {
-            this.tweens.add({
-                targets: logButton,
-                scaleX: logButtonScale * 0.92,
-                scaleY: logButtonScale * 0.92,
-                duration: 150,
-                yoyo: true,
-                onComplete: () => {
-                    this.scene.start('ChangeLogScene');
-                }
-            });
-        });
-    }
-}
-
-class ChangeLogScene extends Phaser.Scene {
-    constructor() {
-        super({ key: 'ChangeLogScene' });
-    }
-
-    preload() {
-        this.load.image('backButton', 'assets/backButton.png');
-    }
-
-    create() {
-        this.add.text(400, 100, `Change Log`, { fontFamily: 'Calibri', fontSize: '64px', fill:'#fff', fontWeight: 'bold' }).setOrigin(0.5)
-        this.add.text(400, 250, `* added Start button\n\n* added Change log`, { fontFamily: 'Calibri', fontSize: '32px', fill:'#fff' }).setOrigin(0.5)
-        const button = this.add.sprite(400, 480, 'backButton').setInteractive();
-        let backButtonScale = 0.75;
-        button.setScale(backButtonScale)
-    
-        button.on('pointerdown', () => {
-            this.tweens.add({
-                targets: button,
-                scaleX: backButtonScale * 0.92,
-                scaleY: backButtonScale * 0.92,
-                duration: 150,
-                yoyo: true,
-                onComplete: () => {
-                    this.scene.start('StartScene');
-                }
-            });
-        })
-    }
 }
 
 class MainGameScene extends Phaser.Scene {
