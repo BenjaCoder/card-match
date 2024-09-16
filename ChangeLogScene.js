@@ -9,9 +9,9 @@ export default class ChangeLogScene extends Phaser.Scene {
 
     create() {
         this.add.text(400, 100, `Change Log`, { fontFamily: 'Calibri', fontSize: '64px', fill:'#fff', fontWeight: 'bold' }).setOrigin(0.5)
-        this.add.text(400, 250, `* added Start button\n\n* added Change log`, { fontFamily: 'Calibri', fontSize: '32px', fill:'#fff' }).setOrigin(0.5)
-        const button = this.add.sprite(400, 480, 'backButton').setInteractive();
-        let backButtonScale = 0.75;
+        createChangeLog(this);
+        const button = this.add.sprite(400, 500, 'backButton').setInteractive();
+        let backButtonScale = 0.70;
         button.setScale(backButtonScale)
     
         button.on('pointerdown', () => {
@@ -25,6 +25,37 @@ export default class ChangeLogScene extends Phaser.Scene {
                     this.scene.start('StartScene');
                 }
             });
-        })
+        });
     }
+}
+
+const changeList = [
+    {
+        'date': '2024-09-16',
+        'changes': ['Refactored StartScene and ChangeLogScene into their own files']
+    },
+    {
+        'date': '2024-09-15',
+        'changes': ['Added ChangeLogScene to track updates to the game']
+    },
+    {
+        'date': '2024-09-14',
+        'changes': ['Added StartScene with button to start the game']
+    },
+    {
+        'date': '2024-09-12',
+        'changes': ['Created initial version of the game']
+    },
+    
+]
+
+function createChangeLog(scene) {
+    let changeLog = ''
+    changeList.forEach(item => {
+        changeLog += `\n${item.date}\n`
+        item.changes.forEach(change => {
+            changeLog += `• ${change}\n`
+        });
+    });
+    scene.add.text(400, 280, changeLog, { fontFamily: 'Calibri', fontSize: '24px', fill: '#fff', wordWrap: true }).setOrigin(0.5)
 }
