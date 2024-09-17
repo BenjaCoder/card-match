@@ -25,7 +25,7 @@ export default class StartScene extends Phaser.Scene {
                 duration: 150,
                 yoyo: true,
                 onComplete: () => {
-                    this.scene.start('MainGameScene');
+                    this.scene.start('OptionsScene');
                 }
             });
         });

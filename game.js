@@ -1,19 +1,45 @@
-import StartScene from './StartScene.js';
-import ChangeLogScene from './ChangeLogScene.js';
+import StartScene from './scenes/StartScene.js';
+import ChangeLogScene from './scenes/ChangeLogScene.js';
+import OptionsScene from './scenes/OptionsScene.js';
 
 let cardData = [
-    { id: 1, name: "Elemental HERO Avian", image: "card1.png" },
-    { id: 2, name: "Elemental HERO Burstinatrix", image: "card2.png" },
-    { id: 3, name: "Elemental HERO Clayman", image: "card3.png" },
-    { id: 4, name: "Elemental HERO Sparkman", image: "card4.png" },
-    { id: 1, name: "Elemental HERO Avian", image: "card1.png" },
-    { id: 2, name: "Elemental HERO Burstinatrix", image: "card2.png" },
-    { id: 3, name: "Elemental HERO Clayman", image: "card3.png" },
-    { id: 4, name: "Elemental HERO Sparkman", image: "card4.png" },
-    // Add more cards as needed
+    {
+        theme: 'Elemental HERO',
+        cards: [
+            { id: 6310, name: "Elemental HERO Avian", image: "6310.png" },
+            { id: 6311, name: "Elemental HERO Burstinatrix", image: "6311.png" },
+            { id: 6312, name: "Elemental HERO Clayman", image: "6312.png" },
+            { id: 6313, name: "Elemental HERO Sparkman", image: "6313.png" },
+        ]
+    },
+    {
+        theme: 'Magnet Warriors',
+        cards: [
+            { id: 4744, name: "Alpha The Magnet Warrior", image: "4744.png" },
+            { id: 4763, name: "Beta The Magnet Warrior", image: "4763.png" },
+            { id: 4792, name: "Gamma The Magnet Warrior", image: "4792.png" },
+            { id: 5002, name: "Valkyrion the Magna Warrior", image: "5002.png" },
+        ]
+    },
+    {
+        theme: 'Bakura',
+        cards: [
+            { id: 5219, name: "The Portrait's Secret", image: "5219.png" },
+            { id: 5220, name: "The Gross Ghost of Fled Dreams", image: "5220.png" },
+            { id: 5221, name: "Headless Knight", image: "5221.png" },
+            { id: 5222, name: "Dark Necrofear", image: "5222.png" }
+        ]
+    },
+    {
+        theme: 'XYZ Dragon Cannon',
+        cards: [
+            { id: 5504, name: "X-Head Cannon", image: "5504.png" },
+            { id: 5552, name: "Y-Dragon Head", image: "5552.png" },
+            { id: 5555, name: "Z-Metal Tank", image: "5555.png" },
+            { id: 5556, name: "XYZ-Dragon Cannon", image: "5556.png" }
+        ]
+    }
 ];
-
-cardData = shuffle(cardData);
 
 let cards = [];
 let cardBack;
@@ -22,7 +48,7 @@ let score = 0;
 let scoreText;
 let timeLeft = 20
 let timerText;
-const cardScaling = 0.8
+const cardScaling = 0.7
 
 function flipCard(card) {
     this.tweens.add({
@@ -49,7 +75,7 @@ function checkMatch() {
         secondCard.disableInteractive();
         firstCard = null;
         secondCard = null;
-        this.time.delayedCall(1000, () => {checkForVictory.call(this)});
+        this.time.delayedCall(1000, () => { checkForVictory.call(this) });
     } else {
         this.time.delayedCall(1000, () => {
             score -= 5;
@@ -86,12 +112,24 @@ class MainGameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MainGameScene'});
     }
+
+    init(data) {
+        this.theme = data.theme;
+    }
     
      preload() {
         this.load.image('cardBack', '/assets/card_back.png');
-        cardData.forEach(card => {
+        let myCardData = '';
+        cardData.forEach((themeSet, index) => {
+            if (themeSet.theme == this.theme)
+                myCardData = cardData[index];
+        });
+        let myCards = myCardData.cards;
+        myCards = [...myCards].concat([...myCards])
+        myCards.forEach(card => {
             this.load.image(card.id, `/assets/${card.image}`);
         });
+        cardData = shuffle(myCards);
     }
     
      create() {
@@ -150,7 +188,7 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [StartScene, ChangeLogScene, MainGameScene]
+    scene: [StartScene, OptionsScene, ChangeLogScene, MainGameScene]
 };
 
 const game = new Phaser.Game(config);
