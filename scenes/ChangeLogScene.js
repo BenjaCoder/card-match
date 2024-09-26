@@ -31,6 +31,10 @@ export default class ChangeLogScene extends Phaser.Scene {
 
 const changeList = [
     {
+        'date': '2024-09-25',
+        'changes': ['Converted button images to dynamically generated buttons', 'Added 4 new card themes, switch out alternating days']
+    },
+    {
         'date': '2024-09-17',
         'changes': ['Added OptionsScene with options for different card themes', 'Increased card image size']
     },

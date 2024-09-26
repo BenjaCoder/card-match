@@ -13,7 +13,7 @@ let cardData = [
         ]
     },
     {
-        theme: 'Magnet Warriors',
+        theme: 'Magnets',
         cards: [
             { id: 4744, name: "Alpha The Magnet Warrior", image: "4744.png" },
             { id: 4763, name: "Beta The Magnet Warrior", image: "4763.png" },
@@ -31,12 +31,48 @@ let cardData = [
         ]
     },
     {
-        theme: 'XYZ Dragon Cannon',
+        theme: 'XYZ-Dragon Cannon',
         cards: [
             { id: 5504, name: "X-Head Cannon", image: "5504.png" },
             { id: 5552, name: "Y-Dragon Head", image: "5552.png" },
             { id: 5555, name: "Z-Metal Tank", image: "5555.png" },
             { id: 5556, name: "XYZ-Dragon Cannon", image: "5556.png" }
+        ]
+    },
+    {
+        theme: 'Destiny HERO',
+        cards: [
+            { id: 6658, name: "Destiny HERO - Doom Lord", image: "6658.png" },
+            { id: 6659, name: "Destiny HERO - Captain Tenacious", image: "6659.png" },
+            { id: 6660, name: "Destiny HERO - Diamond Dude", image: "6660.png" },
+            { id: 6661, name: "Destiny HERO - Dreadmaster", image: "6661.png" }
+        ]
+    },
+    {
+        theme: 'Alexis',
+        cards: [
+            { id: 6472, name: "Blade Skater", image: "6472.png" },
+            { id: 6482, name: "Etoile Cyber", image: "6482.png" },
+            { id: 6485, name: "Cyber Blader", image: "6485.png" },
+            { id: 6666, name: "Cyber Prima", image: "6666.png" }
+        ]
+    },
+    {
+        theme: 'Forbidden One',
+        cards: [
+            { id: 4023, name: "Right Leg of the Forbidden One", image: "4023.png" },
+            { id: 4024, name: "Left Leg of the Forbidden One", image: "4024.png" },
+            { id: 4025, name: "Right Arm of the Forbidden One", image: "4025.png" },
+            { id: 4026, name: "Left Arm of the Forbidden One", image: "4026.png" }
+        ]
+    },
+    {
+        theme: 'Cyber Dragon',
+        cards: [
+            { id: 6390, name: "Cyber Dragon", image: "6390.png" },
+            { id: 6396, name: "Cyber Twin Dragon", image: "6396.png" },
+            { id: 6397, name: "Cyber End Dragon", image: "6397.png" },
+            { id: 6588, name: "Proto-Cyber Dragon", image: "6588.png" }
         ]
     }
 ];
