@@ -9,13 +9,17 @@ export default class OptionsScene extends Phaser.Scene {
 
     create() {
         const themes = [
-            ['Elemental HERO', 'Magnets', 'Bakura', 'XYZ-Dragon Cannon'],
-            ['Alexis', 'Cyber Dragon', 'Destiny HERO', 'Forbidden One']
+            ['Alexis', 'Aromage', 'Bakura', 'Blackwing'],
+            ['Bonz', 'Cyber Dragon', 'Destiny HERO', 'Elemental HERO'],
+            ['Forbidden One', 'Fossil', 'Gate Guardian', 'Greiger'],
+            ['Kuriboh', 'Lumis/Umbra', 'Magician Girl', 'Magnets'],
+            ['Ojama', 'Pegasus', 'Phantom Beast', 'Rafael'],
+            ['Rex Raptor', 'Ruin/Demise', 'Team Taiyou', 'Tyler Sisters'],
+            ['Vehicroid', 'Venom', 'XYZ-Dragon Cannon', 'Yusei\'s Last Stand']
         ]
 
-        let day = new Date().getDate();
-        let index = day % 2;
-        let todaysSet = themes[index];
+        let day = new Date().getDay();
+        let todaysSet = themes[day];
         let scaleXY = 0.92;
         
         this.add.text(400, 80, 'Options', { fontFamily: 'Calibri', fontSize: '64px', fill:'#fff', fontWeight: 'bold' }).setOrigin(0.5)
@@ -44,6 +48,7 @@ export default class OptionsScene extends Phaser.Scene {
         
         const backButton = this.add.sprite(400, 500, 'backButton').setInteractive();
         let backButtonScale = 0.70;
+        backButton.setScale(backButtonScale);
 
         backButton.on('pointerdown', () => {
             this.tweens.add({

@@ -12,7 +12,7 @@ export default class ChangeLogScene extends Phaser.Scene {
         createChangeLog(this);
         const button = this.add.sprite(400, 500, 'backButton').setInteractive();
         let backButtonScale = 0.70;
-        button.setScale(backButtonScale)
+        button.setScale(backButtonScale);
     
         button.on('pointerdown', () => {
             this.tweens.add({
@@ -30,6 +30,10 @@ export default class ChangeLogScene extends Phaser.Scene {
 }
 
 const changeList = [
+    {
+        'date': '2024-09-26',
+        'changes': ['Added 20 additional card themes, rotating weekly']
+    },
     {
         'date': '2024-09-25',
         'changes': ['Converted button images to dynamically generated buttons', 'Added 4 new card themes, switch out alternating days']
