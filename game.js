@@ -195,8 +195,8 @@ let cardData = [
     {
         theme: 'Ruin/Demise',
         cards: [
-            { id: 13743, name: "Ruin, Angel of Oblivion", image: "4017.png" },
-            { id: 13744, name: "Demise, Agent of Armageddon", image: "4038.png" },
+            { id: 13743, name: "Ruin, Angel of Oblivion", image: "13743.png" },
+            { id: 13744, name: "Demise, Agent of Armageddon", image: "13744.png" },
             { id: 6612, name: "Ruin, Queen of Oblivion", image: "6612.png" },
             { id: 6613, name: "Demise, King of Armageddon", image: "6613.png" }
         ]
@@ -262,7 +262,7 @@ let cardBack;
 let firstCard, secondCard;
 let score = 0;
 let scoreText;
-let timeLeft = 20
+let timeLeft = 20;
 let timerText;
 const cardScaling = 0.7
 
@@ -307,12 +307,44 @@ function checkMatch() {
 function endGame() {
     this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#fff', backgroundColor: 'red' }).setOrigin(0.5);
     this.scene.pause();
+
+    const restart = this.add.rectangle(400, 400, 200, 50, 0xffffff).setInteractive();
+    let restartText = this.add.text(400, 400, 'Play Again', { fontSize: '30px', fill: '#fff', backgroundColor: 'blue' }).setOrigin(0.5);
+
+    restart.on('pointerdown', () => {
+        this.isPaused = false;
+        this.tweens.add({
+            targets: [restart, restartText],
+            scaleX: 0.92,
+            scaleY: 0.92,
+            duration: 150,
+            yoyo: true,
+            onComplete: () => {
+                this.scene.start('StartScene');
+            }
+        });
+    });
 }
 
 function checkForVictory() {
     if (cards.every(card => card.isFlipped)) {
         this.add.text(400, 300, 'You win!', { fontSize: '64px', fill: '#fff', backgroundColor: 'red' }).setOrigin(0.5);
-        this.scene.pause();
+        const restart = this.add.rectangle(400, 400, 200, 50, 0xffffff).setInteractive();
+        let restartText = this.add.text(400, 400, 'Play Again', { fontSize: '24px', fill: '#fff', backgroundColor: 'blue' }).setOrigin(0.5);
+
+        restart.on('pointerdown', () => {
+            this.isPaused = false;
+            this.tweens.add({
+                targets: [restart, restartText],
+                scaleX: 0.92,
+                scaleY: 0.92,
+                duration: 150,
+                yoyo: true,
+                onComplete: () => {
+                    this.scene.start('StartScene');
+                }
+            });
+        });
     }
 }
 
